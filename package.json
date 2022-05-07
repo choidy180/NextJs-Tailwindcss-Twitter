@@ -9,14 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^12.1.6",
+    "@zeit/next-bundle-analyzer": "^0.1.2",
     "next": "12.1.6",
+    "next-images": "^1.8.4",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "styled-components": "^5.3.5",
+    "styled-reset": "^4.3.4"
   },
   "devDependencies": {
     "@types/node": "^17.0.31",
     "@types/react": "^18.0.8",
     "autoprefixer": "^10.4.7",
+    "babel-plugin-styled-components": "^2.0.7",
     "eslint": "8.14.0",
     "eslint-config-next": "12.1.6",
     "postcss": "^8.4.13",
