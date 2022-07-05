@@ -11,10 +11,14 @@
   "dependencies": {
     "@next/bundle-analyzer": "^12.1.6",
     "@zeit/next-bundle-analyzer": "^0.1.2",
+    "atom": "^1.4.1",
+    "ionicons": "^6.0.2",
     "next": "12.1.6",
     "next-images": "^1.8.4",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-ionicons": "^4.2.0",
+    "recoil": "^0.7.4",
     "styled-components": "^5.3.5",
     "styled-reset": "^4.3.4"
   },
