@@ -15,9 +15,9 @@ export default function ThemeButton(){
   return (
       <Tdiv>
         <ContrastOutline
-          width={'24px'}
-          height={'24px'}
-          color={"red"}
+          width={'30px'}
+          height={'30px'}
+          color={theme.textColor}
           onClick={toggleDarkAtom}
         />
       </Tdiv>
@@ -25,10 +25,13 @@ export default function ThemeButton(){
 }
 
 const Tdiv = styled.div`
-  width: 300px;
-  height: 300px;
-  background-color: green;
+  width: auto;
+  height: auto;
   position: fixed;
   right: 0;
   bottom: 0;
+  padding: 6.5px;
+  svg{
+    cursor: pointer;
+  }
 `

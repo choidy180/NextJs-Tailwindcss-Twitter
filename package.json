@@ -12,6 +12,7 @@
     "@next/bundle-analyzer": "^12.1.6",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "atom": "^1.4.1",
+    "firebase": "^9.8.4",
     "ionicons": "^6.0.2",
     "next": "12.1.6",
     "next-images": "^1.8.4",

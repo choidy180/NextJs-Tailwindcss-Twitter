@@ -4,9 +4,8 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "../styles/global-style";
 import { basicTheme, darkTheme, lightTheme } from '../enum/ThemeEnums';
 import { RecoilRoot, useRecoilValue } from 'recoil';
-import { isDarkAtom } from '../recoil/theme';
 import { AppProps } from 'next/app';
-import ThemeButton from '../components/themeButton';
+import Sidebar from '../components/Sidebar';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -18,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Head>
         <GlobalStyle/>
         <ThemeProvider theme={basicTheme}>
-          <ThemeButton/>
+          <Sidebar/>
           <Component {...pageProps}/>
         </ThemeProvider>
       </RecoilRoot>
