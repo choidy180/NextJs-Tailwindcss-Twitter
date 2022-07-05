@@ -1,20 +1,25 @@
 import type { NextPage } from "next";
-import { isDarkAtom } from "../recoil/theme";
-import styled from "styled-components";
-import { darkTheme, lightTheme } from "../enum/ThemeEnums";
+import Head from "next/head";
+import Feed from "../components/Feed";
+import Sidebar from "../components/Sidebar";
 
 
 const Home: NextPage = () => {
   return (
-    <Container id="hello" className={"text-6xl"}></Container>
+    <div className="">
+      <Head>
+        <title>Twitter</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main className="bg-black min-h-screen flex max-x-[1500px] mx-auto">
+        <Sidebar/>
+        <Feed/>
+        {/* Widgets */}
+        
+        {/* Modal */}
+      </main>
+    </div>
   )
 }
-
-const Container = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  color: ${isDarkAtom ? darkTheme.textColor : lightTheme.textColor};
-  background-color: ${isDarkAtom ? darkTheme.bgColor : lightTheme.bgColor};
-`
 
 export default Home;

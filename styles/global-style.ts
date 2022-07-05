@@ -21,6 +21,8 @@ export const GlobalStyle = createGlobalStyle`
         }
         -ms-overflow-style: none;
         scrollbar-width: none;
+        background-color: #141414;
+        color: #fff;
     }
     body{
         margin: 0px;

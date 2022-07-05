@@ -1,22 +1,80 @@
+import { 
+  BookmarkOutline, 
+  ChatbubbleEllipsesOutline, 
+  DocumentTextOutline, 
+  FileTrayOutline, 
+  HomeOutline, 
+  NotificationsOutline, 
+  PersonOutline, 
+  PlanetOutline 
+} from "react-ionicons";
+
 interface LinkProps {
   Icon: string,
   text: string,
   active?: boolean
 }
 
-export default function SidebarLink({Icon, text}:LinkProps){
+export default function SidebarLink({Icon, text, active}:LinkProps){
   return (
-    <div className="text-[#d9d9d9] flex items-center justify-center xl:justify-start text-xl space-x-3">
-        <svg
-          className="h-6 w-6"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
+    <div className={`text-[#d9d9d9] flex items-center justify-center xl:justify-start text-xl space-x-3 ${active && "font-bold"}`}>
+      {Icon == "Home" && 
+        <HomeOutline
+          width={"26px"}
+          height={"26px"}
+          color={"#fff"}
         />
-      <span className="hidden xl:inline">{text}</span>
-      <h1>Hello</h1>
+      }
+      {Icon == "Explore" && 
+        <PlanetOutline
+          width={"26px"}
+          height={"26px"}
+          color={"#fff"}
+        />
+      }
+      {Icon == "Notifications" && 
+        <NotificationsOutline
+          width={"26px"}
+          height={"26px"}
+          color={"#fff"}
+        />
+      }
+      {Icon == "Message" &&
+        <FileTrayOutline
+          width={"26px"}
+          height={"26px"}
+          color={"#fff"}
+        />
+      }
+      {Icon == "Bookmarks" &&
+        <BookmarkOutline
+          width={"26px"}
+          height={"26px"}
+          color={"#fff"}
+        />
+      }
+      {Icon == "Lists" &&
+        <DocumentTextOutline
+          width={"26px"}
+          height={"26px"}
+          color={"#fff"}
+        />
+      }
+      {Icon == "Profile" &&
+        <PersonOutline
+          width={"26px"}
+          height={"26px"}
+          color={"#fff"}
+        />
+      }
+      {Icon == "More" &&
+        <ChatbubbleEllipsesOutline
+          width={"26px"}
+          height={"26px"}
+          color={"#fff"}
+        />
+      }
+      <span className="hidden  xl:inline">{text}</span>
     </div>
   )
 }

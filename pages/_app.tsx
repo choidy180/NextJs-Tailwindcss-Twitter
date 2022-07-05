@@ -2,15 +2,13 @@ import '../styles/global-style.ts';
 import Head from 'next/head';
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "../styles/global-style";
-import { basicTheme, darkTheme, lightTheme } from '../enum/ThemeEnums';
-import { RecoilRoot, useRecoilValue } from 'recoil';
+import { basicTheme } from '../enum/ThemeEnums';
 import { AppProps } from 'next/app';
 import Sidebar from '../components/Sidebar';
 import '../styles/globals.css'
-import { isDarkAtom } from '../recoil/theme';
 
 function MyApp({ Component, pageProps }: AppProps) {
-
+  
   return (
     <div>
       <Head>
@@ -19,7 +17,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <GlobalStyle/>
       <ThemeProvider theme={basicTheme}>
-        <Sidebar/>
         <Component {...pageProps}/>
       </ThemeProvider>
     </div>
