@@ -1,13 +1,12 @@
 import type { NextPage } from "next";
-import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "../recoil/theme";
 import styled from "styled-components";
 import { darkTheme, lightTheme } from "../enum/ThemeEnums";
 
 
-const Home: NextPage = (props) => {
+const Home: NextPage = () => {
   return (
-    <Container>Next-basic</Container>
+    <Container id="hello" className={"text-6xl"}></Container>
   )
 }
 

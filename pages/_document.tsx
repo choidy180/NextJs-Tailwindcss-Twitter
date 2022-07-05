@@ -5,6 +5,7 @@ import Document, {
   NextScript,
   DocumentContext,
 } from "next/document";
+import { RecoilRoot } from "recoil";
 import { ServerStyleSheet } from "styled-components";
 
 class MyDocument extends Document {
@@ -32,7 +33,6 @@ class MyDocument extends Document {
       sheet.seal();
     }
   }
-
   render() {
     return (
       <Html>
@@ -57,8 +57,10 @@ class MyDocument extends Document {
           />
         </Head>
         <body>
-          <Main />
-          <NextScript />
+          <RecoilRoot>
+            <Main />
+            <NextScript />
+          </RecoilRoot>
         </body>
       </Html>
     );

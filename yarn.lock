@@ -3578,6 +3578,16 @@
     "object-assign" "^4.1.1"
     "scheduler" "^0.20.1"
 
+"react-icons@^4.4.0":
+  "integrity" "sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg=="
+  "resolved" "https://registry.npmjs.org/react-icons/-/react-icons-4.4.0.tgz"
+  "version" "4.4.0"
+
+"react-ion-icon@^4.0.0":
+  "integrity" "sha512-5VWGgz+MBb3jm+QkhrsTTtl9QE/kju/PBBqkM33Zgp5JPzf/e/Obf/rqXU5Sk4EVsLvsEquBB7W9IQTggW7EDg=="
+  "resolved" "https://registry.npmjs.org/react-ion-icon/-/react-ion-icon-4.0.0.tgz"
+  "version" "4.0.0"
+
 "react-ionicons@^4.2.0":
   "integrity" "sha512-EBZtrnK4Uyro8WYy0fKbGop/wmFkn3DxfY1i730FZSUJP6IIoJbTk58d6DqBdo8alHmAN4STBLzE9t33tBO8dg=="
   "resolved" "https://registry.npmjs.org/react-ionicons/-/react-ionicons-4.2.0.tgz"
@@ -3592,7 +3602,7 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
 
-"react@^17.0.2 || ^18.0.0-0", "react@^18.1.0", "react@>= 16.8.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=16.13.1", "react@18.1.0":
+"react@*", "react@^17.0.2 || ^18.0.0-0", "react@^18.1.0", "react@>= 16.8.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=16.13.1", "react@18.1.0":
   "integrity" "sha512-4oL8ivCz5ZEPyclFQXaNksK3adutVS8l2xzZU0cqEFrE9Sb7fC0EFK5uEk74wIreL1DERyjvsU915j1pcT2uEQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.1.0.tgz"
   "version" "18.1.0"
