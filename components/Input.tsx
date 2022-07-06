@@ -1,23 +1,37 @@
 import { CalendarIcon, ChartBarIcon, EmojiHappyIcon, PhotographIcon, XIcon } from "@heroicons/react/outline";
-import { useRef, useState } from "react"
-import { Picker } from "emoji-mart";
+import { useEffect, useRef, useState } from "react"
 import dynamic from "next/dynamic";
+import data from '@emoji-mart/data'
+import { Picker } from 'emoji-mart'
+import { addDoc } from "@firebase/firestore";
 
-export default function Input(){
+export default function FeedInput(props){
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const filePickerRef = useRef(null);
   const [showEmojis, setShowEmojis] = useState(false);
   const sendPost = async () => {
+    if (loading) return;
+    setLoading(true);
+
+    // const docRef = await addDoc
   }
 
   const addImageToPost = (e) => {
   }
 
   const addEmoji = (e) => {
-
+    let sym = e.unified.split("-");
+    let codesArray = [];
+    sym.forEach((el) => codesArray.push("0x" + el));
+    let emoji = String.fromCodePoint(...codesArray);
+    setInput(input + emoji);
   }
+  useEffect(() => {
+    console.log('window.innerHeight', window.innerHeight);
+    // new Picker({...props, data});
+  },[]);
   return (
     <div className={`border-b border-gray-700 p-3 flex space-x-3 overflow-scroll scrollbar-hide ${loading && "opacity-60"}`}>
       <div className="h-11 w-11 rounded-full cursor-pointer flex justify-center items-center overflow-hidden">
@@ -67,27 +81,26 @@ export default function Input(){
               <ChartBarIcon className="text-[#1d9bf0] h-[22px]" />
             </div>
 
-            <div className="icon" onClick={()=> setShowEmojis(!showEmojis)}>
-              <EmojiHappyIcon className="text-[#1d9bf0] h-[22px]"/>
+            <div className="icon" onClick={()=> {
+              setShowEmojis(!showEmojis)
+            }}>
+              <EmojiHappyIcon className="text-[#f00] h-[22px]"/>
             </div>
 
             <div className="icon">
               <CalendarIcon className="text-[#1d9bf0] h-[22px]"/>
             </div>
-
-            {showEmojis && (
-              <Picker
-                onSelect={addEmoji}
+              {/* <Picker
+                // onSelect={addEmoji}
                 style={{
                   position: "absolute",
-                  marginTop: "465px",
-                  marginLeft: -40,
+                  marginTop: "456px",
+                  marginLeft: "-40px",
                   maxWidth: "320px",
                   borderRadius: "20px",
                 }}
                 theme="dark"
-              />
-            )}
+              /> */}
           </div>
           <button
             className="bg-[#1d9bf0] text-white rounded-full px-4 py-1.5 font-bold shadow-md hover:bg-[#1a8cd8] disabled:hover:bg-[#1d9bf0] disabled:opacity-50"
