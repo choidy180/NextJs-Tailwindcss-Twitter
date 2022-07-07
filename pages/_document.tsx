@@ -5,7 +5,6 @@ import Document, {
   NextScript,
   DocumentContext,
 } from "next/document";
-import { RecoilRoot } from "recoil";
 import { ServerStyleSheet } from "styled-components";
 
 class MyDocument extends Document {
@@ -57,10 +56,8 @@ class MyDocument extends Document {
           />
         </Head>
         <body>
-          <RecoilRoot>
             <Main />
             <NextScript />
-          </RecoilRoot>
         </body>
       </Html>
     );
