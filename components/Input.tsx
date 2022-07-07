@@ -2,12 +2,14 @@ import { CalendarIcon, ChartBarIcon, EmojiHappyIcon, PhotographIcon, XIcon } fro
 import { useEffect, useRef, useState } from "react"
 import { signOut, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
-import { Picker } from 'emoji-mart';
+import { PickerProps } from 'emoji-mart';
+import data from "@emoji-mart/data";
 import { db, storage } from "../firebase/firebase";
 import { addDoc , collection, doc, serverTimestamp, updateDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import EmojiPicker from "./EmojiPicker";
 
-export default function Input(){
+export default function Input(props){
   const { data:session } = useSession();
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -60,10 +62,6 @@ export default function Input(){
     let emoji = String.fromCodePoint(...codesArray);
     setInput(input + emoji);
   }
-  useEffect(() => {
-    console.log('window.innerHeight', window.innerHeight);
-    // new Picker({...props, data});
-  },[]);
   return (
     <div className={`border-b border-gray-700 p-3 flex space-x-3 overflow-scroll scrollbar-hide ${loading && "opacity-60"}`}>
       <div className="h-11 w-11 rounded-full cursor-pointer flex justify-center items-center overflow-hidden">
@@ -122,17 +120,19 @@ export default function Input(){
             <div className="icon">
               <CalendarIcon className="text-[#1d9bf0] h-[22px]"/>
             </div>
-              {/* <Picker
-                // onSelect={addEmoji}
+            {showEmojis && (
+              <EmojiPicker
+                onSelect={addEmoji}
                 style={{
                   position: "absolute",
-                  marginTop: "456px",
-                  marginLeft: "-40px",
+                  marginTop: "465px",
+                  marginLeft: -40,
                   maxWidth: "320px",
                   borderRadius: "20px",
                 }}
                 theme="dark"
-              /> */}
+              />
+            )}
           </div>
           <button
             className="bg-[#1d9bf0] text-white rounded-full px-4 py-1.5 font-bold shadow-md hover:bg-[#1a8cd8] disabled:hover:bg-[#1d9bf0] disabled:opacity-50"
