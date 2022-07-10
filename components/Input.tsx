@@ -2,12 +2,13 @@ import { CalendarIcon, ChartBarIcon, EmojiHappyIcon, PhotographIcon, XIcon } fro
 import { useEffect, useRef, useState } from "react"
 import { signOut, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
-import { PickerProps } from 'emoji-mart';
-import data from "@emoji-mart/data";
 import { db, storage } from "../firebase/firebase";
 import { addDoc , collection, doc, serverTimestamp, updateDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import EmojiPicker from "./EmojiPicker";
+import { PersonCircleOutline } from "react-ionicons";
+import { PickerProps } from "emoji-mart";
+import data from "@emoji-mart/data";
 
 export default function Input(props){
   const { data:session } = useSession();
@@ -45,6 +46,7 @@ export default function Input(props){
     setShowEmojis(false);
   }
 
+  // 이미지 미리보기
   const addImageToPost = (e) => {
     const reader = new FileReader();
     if(e.target.files[0]){
@@ -55,17 +57,38 @@ export default function Input(props){
     }
   }
 
-  const addEmoji = (e) => {
+  // 이모지 인터페이스
+  interface EmojiPickerProps {
+    onEmojiSelect: (e: PickerProps) => void;
+  }
+
+  // 이모지 피커
+  const EmojiPicker: React.FC<EmojiPickerProps> = (props) => {
+    const ref = useRef<HTMLDivElement>(null);
+
+    import("emoji-mart").then(
+      ({ Picker }: any) => new Picker({ ...props, data, ref })
+    );
+
+    return <div ref={ref} className="absolute mt-[360px] ml-[10px] scale-75"/>;
+  };
+
+  const addEmoji = (e: any) => {
     let sym = e.unified.split("-");
-    let codesArray = [];
-    sym.forEach((el) => codesArray.push("0x" + el));
+    let codesArray: any = [];
+    sym.forEach((el: any) => codesArray.push("0x" + el));
     let emoji = String.fromCodePoint(...codesArray);
     setInput(input + emoji);
-  }
+  };
   return (
     <div className={`border-b border-gray-700 p-3 flex space-x-3 overflow-scroll scrollbar-hide ${loading && "opacity-60"}`}>
       <div className="h-11 w-11 rounded-full cursor-pointer flex justify-center items-center overflow-hidden">
-        <img src="/5F5DA47C-79D5-45AD-ACCA-5E15B09E015A.jpeg" alt="" />
+        {/* <img src="/5F5DA47C-79D5-45AD-ACCA-5E15B09E015A.jpeg" alt="" /> */}
+        <PersonCircleOutline
+          width={"32px"}
+          height={"32px"}
+          color={"white"}
+        />
       </div>
       <div className="divide-y divide-gray-700 w-full">
         <div className={`${selectedFile && "pb-7"} ${input && "space-y-2.5"}`}>
@@ -85,11 +108,11 @@ export default function Input(props){
               >
                 <XIcon className="text-white h-5"/>
               </div>
-              <img
+              {/* <img
                 src={selectedFile}
                 alt=""
                 className="rounded-2xl max-h-80 object-contain"
-              />
+              /> */}
             </div>
           )}
         </div>
@@ -120,19 +143,7 @@ export default function Input(props){
             <div className="icon">
               <CalendarIcon className="text-[#1d9bf0] h-[22px]"/>
             </div>
-            {showEmojis && (
-              <EmojiPicker
-                onSelect={addEmoji}
-                style={{
-                  position: "absolute",
-                  marginTop: "465px",
-                  marginLeft: -40,
-                  maxWidth: "320px",
-                  borderRadius: "20px",
-                }}
-                theme="dark"
-              />
-            )}
+            {showEmojis && <EmojiPicker onEmojiSelect={addEmoji}/>}
           </div>
           <button
             className="bg-[#1d9bf0] text-white rounded-full px-4 py-1.5 font-bold shadow-md hover:bg-[#1a8cd8] disabled:hover:bg-[#1d9bf0] disabled:opacity-50"
