@@ -1,17 +1,14 @@
 import { CalendarIcon, ChartBarIcon, EmojiHappyIcon, PhotographIcon, XIcon } from "@heroicons/react/outline";
-import { useEffect, useRef, useState } from "react"
-import { signOut, useSession } from "next-auth/react";
-import dynamic from "next/dynamic";
-import { db, storage } from "../firebase/firebase";
+import { useRef, useState } from "react"
+import { dbService, storageService } from "../firebase/firebase";
 import { addDoc , collection, doc, serverTimestamp, updateDoc } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
-import EmojiPicker from "./EmojiPicker";
 import { PersonCircleOutline } from "react-ionicons";
 import { PickerProps } from "emoji-mart";
 import data from "@emoji-mart/data";
 
 export default function Input(props){
-  const { data:session } = useSession();
+  // const { data:session } = useSession();
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -21,7 +18,7 @@ export default function Input(props){
     if (loading) return;
     setLoading(true);
 
-    const docRef = await addDoc(collection(db, "posts"),{
+    const docRef = await addDoc(collection(dbService, "posts"),{
       // id: session.user.uid,
       // username: session.user.name,
       // userImg: session.user.image,
@@ -30,11 +27,11 @@ export default function Input(props){
       timestamp: serverTimestamp(),
     });
 
-    const imageRef = ref(storage, `posts/${docRef.id}/image`);
+    const imageRef = ref(storageService, `posts/${docRef.id}/image`);
     if(selectedFile){
       await uploadString(imageRef, selectedFile, "data_url").then(async()=>{
         const downloadURL = await getDownloadURL(imageRef);
-        await updateDoc(doc(db, "posts", docRef.id),{
+        await updateDoc(doc(dbService, "posts", docRef.id),{
           image: downloadURL,
         })
       })

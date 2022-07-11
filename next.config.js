@@ -7,7 +7,6 @@ module.exports = withBundleAnalyzer({
   env: {
     BASE_URL: process.env.BASE_URL,
   },
-
   webpack(conf) {
     conf.module.rules.push({
       test: /\.svg$/,

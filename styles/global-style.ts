@@ -57,4 +57,28 @@ export const GlobalStyle = createGlobalStyle`
             display: block;
         }
     }
+
+    /* CSS */
+    #HomeInput{
+        border: .5px solid white;
+        border-radius: 4px;
+        font-weight: 300;
+        ::placeholder{
+            font-weight: 300;
+        }
+    }
+    .sign_button{
+        border: none;
+        padding: 8px 0;
+        border-radius: 28px;
+        background-color: #00ACEE;
+        color: white;
+        outline: none;
+    }
+    .indexBorderLine{
+        border-top: .4px solid white;
+    }
+    .Main_SocialIcon{
+        cursor: pointer;
+    }
 `;

@@ -21,7 +21,7 @@
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "atom": "^1.4.1",
     "emoji-mart": "^5.1.0",
-    "firebase": "^9.8.4",
+    "firebase": "^9.9.0",
     "ionicons": "^6.0.2",
     "next": "12.1.6",
     "next-auth": "^4.8.0",
