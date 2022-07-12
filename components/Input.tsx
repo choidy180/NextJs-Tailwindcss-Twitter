@@ -6,9 +6,10 @@ import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { PersonCircleOutline } from "react-ionicons";
 import { PickerProps } from "emoji-mart";
 import data from "@emoji-mart/data";
+import Email from "next-auth/providers/email";
 
 export default function Input(props){
-  console.log(props.photoURL);
+  console.log(props);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -19,9 +20,10 @@ export default function Input(props){
     setLoading(true);
 
     const docRef = await addDoc(collection(dbService, "posts"),{
-      // id: session.user.uid,
-      // username: session.user.name,
-      // userImg: session.user.image,
+      id: props?.email,
+      useremail: props?.email,
+      username: props?.displayName,
+      userImg: props?.photoURL,
       // tag: session.user.tag,
       text: input,
       timestamp: serverTimestamp(),
@@ -36,7 +38,6 @@ export default function Input(props){
         })
       })
     }
-
     setLoading(false);
     setInput("");
     setSelectedFile(null);
@@ -79,11 +80,11 @@ export default function Input(props){
   };
   return (
     <div className={`border-b-[.6px] border-solid border-gray-300 py-4 px-3 flex space-x-3 overflow-scroll scrollbar-hide ${loading && "opacity-60"}`}>
-      <div className="h-11 w-11 rounded-full cursor-pointer flex justify-center items-center overflow-hidden">
+      <div className="h-[42px] w-[42px] rounded-full cursor-pointer flex justify-center items-center overflow-hidden">
         {props.photoURL ? 
           <img src={props.photoURL} alt="" className=" h-full" /> :
           <PersonCircleOutline
-            width={"32px"}
+            width={"34px"}
             height={"32px"}
             color={"white"}
           />
@@ -107,11 +108,11 @@ export default function Input(props){
               >
                 <XIcon className="text-white h-5"/>
               </div>
-              {/* <img
+              <img
                 src={selectedFile}
                 alt=""
                 className="rounded-2xl max-h-80 object-contain"
-              /> */}
+              />
             </div>
           )}
         </div>
