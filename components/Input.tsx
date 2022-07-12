@@ -8,7 +8,7 @@ import { PickerProps } from "emoji-mart";
 import data from "@emoji-mart/data";
 
 export default function Input(props){
-  // const { data:session } = useSession();
+  console.log(props.photoURL);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -78,29 +78,31 @@ export default function Input(props){
     setInput(input + emoji);
   };
   return (
-    <div className={`border-b border-gray-700 p-3 flex space-x-3 overflow-scroll scrollbar-hide ${loading && "opacity-60"}`}>
+    <div className={`border-b-[.6px] border-solid border-gray-300 py-4 px-3 flex space-x-3 overflow-scroll scrollbar-hide ${loading && "opacity-60"}`}>
       <div className="h-11 w-11 rounded-full cursor-pointer flex justify-center items-center overflow-hidden">
-        {/* <img src="/5F5DA47C-79D5-45AD-ACCA-5E15B09E015A.jpeg" alt="" /> */}
-        <PersonCircleOutline
-          width={"32px"}
-          height={"32px"}
-          color={"white"}
-        />
+        {props.photoURL ? 
+          <img src={props.photoURL} alt="" className=" h-full" /> :
+          <PersonCircleOutline
+            width={"32px"}
+            height={"32px"}
+            color={"white"}
+          />
+        }
       </div>
-      <div className="divide-y divide-gray-700 w-full">
+      <div className="divide-y divide-gray-700 w-[calc(100%-42px)]">
         <div className={`${selectedFile && "pb-7"} ${input && "space-y-2.5"}`}>
           <textarea
             value={input} 
             onChange={(e) => setInput(e.target.value)}
             placeholder="What's happening?"
             rows={Number(2)}
-            className="bg-transparent outline-none text-[#d9d9d9] text-lg placeholder-gray-500 tracking-wide w-full min-h[50px]"
+            className="bg-transparent outline-none text-[#d9d9d9] text-lg placeholder-gray-500 tracking-wide w-full min-h-[70px]"
           />
 
           {selectedFile && (
             <div className="relative">
               <div 
-                className="absolute w-8 h-8 bg-[#15181c] hover:bg-[#272c26] bg-opacity-75 rounded-full flex items-center justify-center top-1 left-1 cursor-pointer"
+                className="absolute w-8 h-8 bg-[#15181c] hover:bg-[#272c26] bg-opacity-75 rounded-full flex items-center justify-center top-1 left-1 cursor-pointer textbox"
                 onClick={()=>setSelectedFile(null)}
               >
                 <XIcon className="text-white h-5"/>
@@ -134,7 +136,7 @@ export default function Input(props){
             <div className="icon" onClick={()=> {
               setShowEmojis(!showEmojis)
             }}>
-              <EmojiHappyIcon className="text-[#f00] h-[22px]"/>
+              <EmojiHappyIcon className="text-[#1d9bf0] h-[22px]"/>
             </div>
 
             <div className="icon">

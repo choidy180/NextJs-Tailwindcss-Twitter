@@ -13,7 +13,7 @@ const Home: NextPage = (props) => {
       </Head>
       <main className="bg-black min-h-screen flex max-x-[1500px] mx-auto">
         <Sidebar {...props["userObj"]}/>
-        <Feed/>
+        <Feed {...props["userObj"]}/>
       </main>
     </div>
   )

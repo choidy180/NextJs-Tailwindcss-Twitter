@@ -101,7 +101,7 @@ const Index: NextPage = () => {
             type="text" 
             name="email"
             placeholder="이메일(example@email.com)" 
-            className="HomeInput mt-3 w-full box-border bg-transparent border-gray-400 border-[1px] px-4 py-2 outline-none placeholder:font-medium text-xl"
+            className="HomeInput mt-3 w-full box-border bg-transparent px-4 py-2 outline-none placeholder:font-medium text-xl"
             value={email}
             onChange={onChange}
           />
@@ -109,7 +109,7 @@ const Index: NextPage = () => {
             type="password"
             name="password" 
             placeholder="비밀번호" 
-            className="HomeInput mt-3 w-full box-border bg-transparent border-gray-400 border-[1px] px-4 py-2 outline-none placeholder:font-medium text-xl"
+            className="HomeInput mt-3 w-full box-border bg-transparent px-4 py-2 outline-none placeholder:font-medium text-xl"
             value={password}
             onChange={onChange}
           />

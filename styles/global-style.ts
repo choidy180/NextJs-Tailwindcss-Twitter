@@ -59,7 +59,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     /* CSS */
-    #HomeInput{
+    .HomeInput{
         border: .5px solid white;
         border-radius: 4px;
         font-weight: 300;
@@ -80,5 +80,15 @@ export const GlobalStyle = createGlobalStyle`
     }
     .Main_SocialIcon{
         cursor: pointer;
+    }
+    textarea{
+        resize: none !important;
+        border-bottom: .4px solid #fff;
+        outline: none;
+        border-bottom: .4px solid #fff !important;
+    }
+    input, textarea, ::selection,
+    input:focus, textarea:focus, select:focus{
+        outline: none;
     }
 `;
