@@ -1,5 +1,5 @@
 import { SparklesIcon } from "@heroicons/react/outline";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { dbService } from "../firebase/firebase";
 import Input from "./Input";
@@ -21,6 +21,13 @@ export default function Feed(props){
   }
   useEffect(()=>{
     getNewPost();
+    onSnapshot(collection(dbService, "posts"), (snapshot) => {
+      const PostArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setNewContent(PostArray);
+    })
   },[])
   return (
     <div className="flex-grow border-solid border-l-[.5px] border-gray-400 max-w-2xl sm:ml-[68px] xl:ml-[340px] border-r-[.5px]">
@@ -32,7 +39,7 @@ export default function Feed(props){
       </div>
       <Input {...props}/>
       {newContent.map((post, i)=> (
-        <Post {...post}/>
+        <Post {...post} key={i}/>
       ))}
     </div>
   )

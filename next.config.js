@@ -35,3 +35,8 @@ module.exports = withBundleAnalyzer({
     return conf;
   },
 });
+module.exports = {
+  images: {
+      domains: ['firebasestorage.googleapis.com'],
+  },
+}
