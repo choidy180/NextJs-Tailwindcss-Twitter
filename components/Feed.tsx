@@ -1,5 +1,5 @@
 import { SparklesIcon } from "@heroicons/react/outline";
-import { collection, getDocs, onSnapshot } from "firebase/firestore";
+import { collection, getDocs, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { dbService } from "../firebase/firebase";
 import Input from "./Input";
@@ -8,25 +8,22 @@ import Post from "./Post";
 export default function Feed(props){
   const[newContent, setNewContent] = useState([]);
   const getNewPost = async () => {
-    const posts = await getDocs(collection(dbService, "posts"));
-    const responseDataList = await Promise.all(
-      posts.docs.map(document => {
-        const postObj = {
-          ...document.data(),
-          id: document.id,
-        }
-        setNewContent((prev) => [postObj, ...prev]);
-      })
-    )
+    const q = query(collection(dbService, "posts"),orderBy("timestamp","desc"));
+    onSnapshot(q, (snapshot) => {
+      setNewContent(snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id
+      })))
+    })
   }
   useEffect(()=>{
     getNewPost();
-    onSnapshot(collection(dbService, "posts"), (snapshot) => {
-      const PostArray = snapshot.docs.map((doc) => ({
-        id: doc.id,
+    const q = query(collection(dbService, "posts"),orderBy("timestamp","desc"));
+    onSnapshot(q, (snapshot) => {
+      setNewContent(snapshot.docs.map((doc) => ({
         ...doc.data(),
-      }));
-      setNewContent(PostArray);
+        id: doc.id
+      })))
     })
   },[])
   return (

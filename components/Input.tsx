@@ -68,7 +68,7 @@ export default function Input(props){
       ({ Picker }: any) => new Picker({ ...props, data, ref })
     );
 
-    return <div ref={ref} className="absolute mt-[360px] ml-[10px] scale-75"/>;
+    return <div ref={ref} className="absolute mt-[360px] ml-[10px] scale-75 z-[999999]"/>;
   };
 
   const addEmoji = (e: any) => {

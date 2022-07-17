@@ -80,6 +80,7 @@ const Index: NextPage = () => {
             layout="fill"
             objectFit="cover"
             className="brightness-[50%]"
+            alt="image"
           />
         </div>
         <form className="absolute min-w-[320px] min-h-[100px] flex justify-start items-center flex-col right-0 top-[80px] translate-x-[calc(-50%+104px)]" onSubmit={onSubmit}>
