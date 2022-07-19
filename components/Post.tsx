@@ -2,7 +2,12 @@ import { getAuth } from "firebase/auth";
 import Image from "next/image";
 import { EllipsisHorizontal } from "react-ionicons";
 import Moment from "react-moment";
+import { VscTrash } from "@react-icons/all-files/vsc/VscTrash";
+import { IoChatbubbleEllipsesOutline } from "@react-icons/all-files/io5/IoChatbubbleEllipsesOutline";
+import { AiOutlineHeart } from "@react-icons/all-files/ai/AiOutlineHeart";
+import { AiOutlineShareAlt } from "@react-icons/all-files/ai/AiOutlineShareAlt";
 import { AutoHeightImageWrapper } from "./AutoHeightImageBox";
+import { HiOutlineChartBar } from "@react-icons/all-files/hi/HiOutlineChartBar"
 
 export default function Post(props){
   const auth = getAuth();
@@ -46,6 +51,23 @@ export default function Post(props){
             />
           </AutoHeightImageWrapper>
         )}
+        <div className="mt-6 w-full flex justify-between items-center">
+          <div className="w-full flex justify-center items-center p-2 pt-1">
+            <IoChatbubbleEllipsesOutline className="text-[30px] font-this cursor-pointer hover:text-[#0abde3] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"/>
+          </div>
+          <div className="w-full flex justify-center items-center p-2 pt-1">
+            <VscTrash className="text-[30px] font-this cursor-pointer hover:text-[#c8d6e5] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"/>
+          </div>
+          <div className="w-full flex justify-center items-center p-2 pt-1">
+            <AiOutlineHeart className="text-[30px] font-this cursor-pointer hover:text-[#f53b57] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"/>
+          </div>
+          <div className="w-full flex justify-center items-center p-2 pt-1">
+            <AiOutlineShareAlt className="text-[30px] font-this cursor-pointer hover:text-[#0be881] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"/>
+          </div>
+          <div className="w-full flex justify-center items-center p-2 pt-1">
+            <HiOutlineChartBar className="text-[30px] font-this cursor-pointer hover:text-[#7efff5] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"/>
+          </div>
+        </div>
       </div>
     </div>
   )

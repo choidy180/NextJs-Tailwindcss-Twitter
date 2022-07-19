@@ -81,11 +81,7 @@ export const GlobalStyle = createGlobalStyle`
     .Main_SocialIcon{
         cursor: pointer;
     }
-    .ellipsisHorizontal{
-        position: absolute;
-        right: 12px;
-        height: 4px;
-        color: #fff;
+    .postUnderIcon{
         cursor: pointer;
     }
     textarea{

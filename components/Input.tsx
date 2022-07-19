@@ -6,10 +6,8 @@ import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { PersonCircleOutline } from "react-ionicons";
 import { PickerProps } from "emoji-mart";
 import data from "@emoji-mart/data";
-import Email from "next-auth/providers/email";
 
 export default function Input(props){
-  console.log(props);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
