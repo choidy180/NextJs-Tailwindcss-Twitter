@@ -36,7 +36,9 @@
     "recoil": "^0.7.4",
     "recoil-persist": "^4.2.0",
     "styled-components": "^5.3.5",
-    "styled-reset": "^4.3.4"
+    "styled-reset": "^4.3.4",
+    "sweetalert2": "^11.4.23",
+    "sweetalert2-react-content": "^5.0.1"
   },
   "devDependencies": {
     "@types/node": "^17.0.31",

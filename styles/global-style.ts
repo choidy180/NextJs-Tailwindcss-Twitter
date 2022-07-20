@@ -94,4 +94,13 @@ export const GlobalStyle = createGlobalStyle`
     input:focus, textarea:focus, select:focus{
         outline: none;
     }
+    .swal2-popup{
+        background-color: transparent !important;
+    }
+    .swal2-html-container{
+        margin: 0 !important;
+        background-color: #141414;
+        border-radius: 18px;
+        min-width: 500px;
+    }
 `;
