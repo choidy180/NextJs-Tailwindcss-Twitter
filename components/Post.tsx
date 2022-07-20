@@ -8,9 +8,32 @@ import { AiOutlineHeart } from "@react-icons/all-files/ai/AiOutlineHeart";
 import { AiOutlineShareAlt } from "@react-icons/all-files/ai/AiOutlineShareAlt";
 import { AutoHeightImageWrapper } from "./AutoHeightImageBox";
 import { HiOutlineChartBar } from "@react-icons/all-files/hi/HiOutlineChartBar"
+import { dbService, storageService } from "../firebase/firebase";
+import { deleteDoc, doc } from "firebase/firestore";
+import { deleteObject, ref } from "firebase/storage";
 
 export default function Post(props){
   const auth = getAuth();
+  // 포스트삭제
+  const deletePost = (id:string) => (event: any) => {
+    const docRef = doc(dbService, "posts", id);
+    deleteDoc(docRef)
+    .then(()=>{
+      console.log("Your post has been deleted.");
+    })
+    .catch(error => {
+      console.log(error);
+    })
+    const desertRef = ref(storageService, `posts/${id}/image`);
+    // Delete the file
+    deleteObject(desertRef)
+    .then(()=>{
+      console.log("The image of the post you selected has been deleted.");
+    })
+    .catch(error => {
+      console.log(error);
+    })
+    }
   return (
     <div className="w-[calc(100% - 64px)] h-auto p-3 border-solid border-b-[.6px] border-gray-300 relative flex justify-start items-start">
       <div className="absolute w-[42px] h-[42px] left-3 bg-red-500 top-3 rounded-full overflow-hidden flex justify-center items-center">
@@ -55,9 +78,14 @@ export default function Post(props){
           <div className="w-full flex justify-center items-center p-2 pt-1">
             <IoChatbubbleEllipsesOutline className="text-[30px] font-this cursor-pointer hover:text-[#0abde3] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"/>
           </div>
-          <div className="w-full flex justify-center items-center p-2 pt-1">
-            <VscTrash className="text-[30px] font-this cursor-pointer hover:text-[#c8d6e5] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"/>
-          </div>
+          {auth.currentUser.email == props?.useremail && (
+            <div className="w-full flex justify-center items-center p-2 pt-1">
+              <VscTrash 
+                className="text-[30px] font-this cursor-pointer hover:text-[#c8d6e5] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"
+                onClick={deletePost(props?.id)}
+              />
+            </div>
+          )}
           <div className="w-full flex justify-center items-center p-2 pt-1">
             <AiOutlineHeart className="text-[30px] font-this cursor-pointer hover:text-[#f53b57] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"/>
           </div>
