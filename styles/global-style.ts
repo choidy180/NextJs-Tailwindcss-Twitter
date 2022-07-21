@@ -88,7 +88,7 @@ export const GlobalStyle = createGlobalStyle`
         resize: none !important;
         border-bottom: .4px solid #fff;
         outline: none;
-        border-bottom: .4px solid #fff !important;
+        border-bottom: .4px solid #fff;
     }
     input, textarea, ::selection,
     input:focus, textarea:focus, select:focus{
@@ -101,6 +101,6 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0 !important;
         background-color: #141414;
         border-radius: 18px;
-        min-width: 500px;
+        min-width: 400px;
     }
 `;

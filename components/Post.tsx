@@ -1,6 +1,6 @@
 import { getAuth } from "firebase/auth";
 import Image from "next/image";
-import { EllipsisHorizontal } from "react-ionicons";
+import { EllipsisHorizontal} from "react-ionicons";
 import Moment from "react-moment";
 import { VscTrash } from "@react-icons/all-files/vsc/VscTrash";
 import { IoChatbubbleEllipsesOutline } from "@react-icons/all-files/io5/IoChatbubbleEllipsesOutline";
@@ -14,7 +14,8 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import Input from "./Input";
+import Comment from "./Comment";
+import Link from "next/link";
 
 export default function Post(props){
   const auth = getAuth();
@@ -61,14 +62,14 @@ export default function Post(props){
     })
   }
   const replyContent = () => (event: any)=> {
-    console.log(auth);
+    event.preventDefault();
     SwalContent.fire({
       padding: '0px',
       customClass:{
         htmlContainer: '',
       },
       html: (
-        <div className="w-full h-auto relative pt-14 pb-6">
+        <div className="w-full h-auto relative pt-14 pb-6 overflow-auto">
           <div className="w-10 h-10 flex justify-center items-center rounded-full overflow-hidden absolute left-4 top-4">
             <IoAddOutline className="rotate-45 hover:bg-zinc-800 text-white w-10 h-10 absolute top-0 left-0 cursor-pointer"/>
           </div>
@@ -85,7 +86,7 @@ export default function Post(props){
             <p className="w-full text-left mt-[2px] text-white text-[14px]">{props?.text}</p>     
             <p className="w-full text-left mt-[8px] text-zinc-600 text-[14px]">Replying to <span className="text-[#1D9BF0]">@MinSeok</span></p>   
           </div>
-          <div className="pl-11 pt-3 w-full relative mt-6">
+          <div className="pl-24 pt-3 w-full relative mt-6 overflow-auto">
             <div className="w-12 h-12 flex justify-center items-center absolute left-6 top-3 rounded-full overflow-hidden">
               <Image
                 layout="fill"
@@ -94,11 +95,7 @@ export default function Post(props){
                 alt={"image"}
               />
             </div>
-            <input 
-              type="text" 
-              placeholder="Tweet your reply"
-              className="text-2xl p-2 pl-10 w-full bg-transparent border-0 outline-none text-white"
-            /> 
+            <Comment {...props}/>
           </div>
         </div>
       ),
@@ -106,71 +103,73 @@ export default function Post(props){
     })
   }
   return (
-    <div className="w-[calc(100% - 64px)] h-auto p-3 border-solid border-b-[.6px] border-gray-300 relative flex justify-start items-start">
-      <div className="absolute w-[42px] h-[42px] left-3 bg-red-500 top-3 rounded-full overflow-hidden flex justify-center items-center">
-        {props?.userImg && (
-          <Image
-            layout="fill"
-            objectFit='contain'
-            src={props?.userImg}
-            alt={"image"}
-            className="autoImage"
-          />
-        )}
-      </div>
-      {auth.currentUser.email == props?.useremail && (
-        <EllipsisHorizontal
-          width={"20px"}
-          height={"20px"}
-          color={"#e9e9e9"}
-          style={{
-            position: 'absolute',
-            right: '12px',
-            cursor: 'pointer',
-          }}
-        />
-      )}
-      <div>{props?.email}</div>
-      <div className="w-full flex flex-col justify-start items-start">
-        <p className="text-xl text-white font-semibold pl-[54px]">{props?.username}<Moment fromNow className="font-thin ml-4 text-[#95afc0]">{props?.timestamp?.toDate()}</Moment> </p>
-        <p className="text-lg text-white mt-[0px] pl-[54px]">{props?.text}</p>
-        {props?.image && (
-          <AutoHeightImageWrapper>
+    <Link href={`${props?.id}`}>
+      <div className="w-[calc(100% - 64px)] h-auto p-3 border-solid border-b-[.6px] border-gray-300 relative flex justify-start items-start">
+        <div className="absolute w-[42px] h-[42px] left-3 bg-red-500 top-3 rounded-full overflow-hidden flex justify-center items-center">
+          {props?.userImg && (
             <Image
               layout="fill"
               objectFit='contain'
-              src={props?.image}
+              src={props?.userImg}
               alt={"image"}
               className="autoImage"
             />
-          </AutoHeightImageWrapper>
+          )}
+        </div>
+        {auth.currentUser.email == props?.useremail && (
+          <EllipsisHorizontal
+            width={"20px"}
+            height={"20px"}
+            color={"#e9e9e9"}
+            style={{
+              position: 'absolute',
+              right: '12px',
+              cursor: 'pointer',
+            }}
+          />
         )}
-        <div className="mt-4 w-full flex justify-between items-center">
-          <div className="w-full flex justify-center items-center p-2 pt-1">
-            <IoChatbubbleEllipsesOutline 
-              className="text-[30px] font-this cursor-pointer hover:text-[#0abde3] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"
-              onClick={replyContent()}
-            />
-          </div>
-          {auth.currentUser.email == props?.useremail && (
+        <div>{props?.email}</div>
+        <div className="w-full flex flex-col justify-start items-start">
+          <p className="text-xl text-white font-semibold pl-[54px]">{props?.username}<Moment fromNow className="font-thin ml-4 text-[#95afc0]">{props?.timestamp?.toDate()}</Moment> </p>
+          <p className="text-lg text-white mt-[0px] pl-[54px]">{props?.text}</p>
+          {props?.image && (
+            <AutoHeightImageWrapper>
+              <Image
+                layout="fill"
+                objectFit='contain'
+                src={props?.image}
+                alt={"image"}
+                className="autoImage"
+              />
+            </AutoHeightImageWrapper>
+          )}
+          <div className="mt-4 w-full flex justify-between items-center">
             <div className="w-full flex justify-center items-center p-2 pt-1">
-              <VscTrash 
-                className="text-[30px] font-this cursor-pointer hover:text-[#c8d6e5] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"
-                onClick={deletePost(props?.id)}
+              <IoChatbubbleEllipsesOutline 
+                className="text-[36px] font-this cursor-pointer hover:text-[#0abde3] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"
+                onClick={replyContent()}
               />
             </div>
-          )}
-          <div className="w-full flex justify-center items-center p-2 pt-1">
-            <AiOutlineHeart className="text-[30px] font-this cursor-pointer hover:text-[#f53b57] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"/>
-          </div>
-          <div className="w-full flex justify-center items-center p-2 pt-1">
-            <AiOutlineShareAlt className="text-[30px] font-this cursor-pointer hover:text-[#0be881] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"/>
-          </div>
-          <div className="w-full flex justify-center items-center p-2 pt-1">
-            <HiOutlineChartBar className="text-[30px] font-this cursor-pointer hover:text-[#7efff5] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"/>
+            {auth.currentUser.email == props?.useremail && (
+              <div className="w-full flex justify-center items-center p-2 pt-1">
+                <VscTrash 
+                  className="text-[36px] font-this cursor-pointer hover:text-[#c8d6e5] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"
+                  onClick={deletePost(props?.id)}
+                />
+              </div>
+            )}
+            <div className="w-full flex justify-center items-center p-2 pt-1">
+              <AiOutlineHeart className="text-[36px] font-this cursor-pointer hover:text-[#f53b57] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"/>
+            </div>
+            <div className="w-full flex justify-center items-center p-2 pt-1">
+              <AiOutlineShareAlt className="text-[36px] font-this cursor-pointer hover:text-[#0be881] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"/>
+            </div>
+            <div className="w-full flex justify-center items-center p-2 pt-1">
+              <HiOutlineChartBar className="text-[36px] font-this cursor-pointer hover:text-[#7efff5] hover:bg-[#545658] p-2 rounded-full transition ease-in-out delay-0"/>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
