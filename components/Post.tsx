@@ -104,7 +104,7 @@ export default function Post(props){
   }
   return (
     <Link href={`${props?.id}`}>
-      <div className="w-[calc(100% - 64px)] h-auto p-3 border-solid border-b-[.6px] border-gray-300 relative flex justify-start items-start">
+      <div className="w-[calc(100% - 64px)] h-auto p-3 border-solid border-b-[.6px] border-gray-300 relative flex justify-start items-start cursor-pointer">
         <div className="absolute w-[42px] h-[42px] left-3 bg-red-500 top-3 rounded-full overflow-hidden flex justify-center items-center">
           {props?.userImg && (
             <Image
